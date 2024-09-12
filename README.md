@@ -57,8 +57,8 @@ module "elasticache_redis" {
   node_type                   = "cache.t3.micro"
   number_of_nodes             = 1
   engine_version              = "6.x"
-  vpc_id                     = "vpc-0abcd1234efgh5678"
-  vpc_cidr                   = "172.16.0.0/16"
+  vpc_id                      = "vpc-0abcd1234efgh5678"
+  vpc_cidr                    = "172.16.0.0/16"
   private_subnet_ids          = ["subnet-0abcd1234efgh5678"]
   log_group                   = "my-log-group"
   enable_auth                 = true
