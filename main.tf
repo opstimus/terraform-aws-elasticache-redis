@@ -77,6 +77,7 @@ resource "aws_elasticache_replication_group" "main" {
   auth_token                 = length(random_password.main) > 0 ? random_password.main[0].result : null
   transit_encryption_enabled = var.enable_auth ? true : var.enable_transit_encryption
   at_rest_encryption_enabled = var.enable_at_rest_encryption
+  transit_encryption_mode    = var.transit_encryption_mode
   node_type                  = var.node_type
   num_cache_clusters         = var.number_of_nodes
   parameter_group_name       = length(aws_elasticache_parameter_group.main) > 0 ? aws_elasticache_parameter_group.main[0].name : "default.${var.parameter_group_family}"
