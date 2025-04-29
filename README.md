@@ -1,50 +1,51 @@
 # AWS ElastiCache Redis Module
 
-## Description 
+## Description
 
 This Terraform module provisions an AWS ElastiCache Redis cluster, including associated security groups, parameter groups, subnet groups, and secrets. It supports optional authentication and encryption configurations.
 
-## Requirements 
+## Requirements
 
-| Name | Version | 
-|------|---------| 
-| terraform | >= 1.3.0 | 
-| aws | >= 4.0 | 
-| random | >= 3.4.0 | 
+| Name | Version |
+|------|---------|
+| terraform | >= 1.3.0 |
+| aws | >= 4.0 |
+| random | >= 3.4.0 |
 
-## Providers 
+## Providers
 
-| Name | Version | 
-|------|---------| 
-| aws | >= 4.0 | 
-| random | >= 3.4.0 | 
+| Name | Version |
+|------|---------|
+| aws | >= 4.0 |
+| random | >= 3.4.0 |
 
-## Inputs 
+## Inputs
 
-| Name                       | Description                          | Type    | Default | Required | 
-|----------------------------|--------------------------------------|---------|---------|:--------:| 
-| project                    | Project name                         | string  | -       | yes      | 
-| environment                | Environment name                     | string  | -       | yes      | 
-| parameter_group_family     | Parameter group family               | string  | -       | yes      | 
-| parameter_group_parameters | List of parameter group parameters   | list    | []      | no       | 
-| node_type                  | Node type for the ElastiCache cluster | string  | -       | yes      | 
-| number_of_nodes            | Number of nodes in the cluster       | number  | 1       | no       | 
-| engine_version             | Redis engine version                 | string  | -       | yes      | 
-| vpc_id                     | VPC ID for the security group        | string  | -       | yes      | 
-| vpc_cidr                   | VPC CIDR block                        | string  | -       | yes      | 
-| private_subnet_ids         | List of private subnet IDs            | list    | -       | yes      | 
-| log_group                  | CloudWatch log group                 | string  | -       | yes      | 
-| enable_auth                | Enable authentication                | bool    | false   | no       | 
-| enable_transit_encryption  | Enable transit encryption            | bool    | false   | no       | 
-| enable_at_rest_encryption  | Enable at-rest encryption            | bool    | false   | no       | 
+| Name                       | Description                          | Type    | Default | Required |
+|----------------------------|--------------------------------------|---------|---------|:--------:|
+| project                    | Project name                         | string  | -       | yes      |
+| environment                | Environment name                     | string  | -       | yes      |
+| parameter_group_family     | Parameter group family               | string  | -       | yes      |
+| parameter_group_parameters | List of parameter group parameters   | list    | []      | no       |
+| node_type                  | Node type for the ElastiCache cluster | string | -       | yes      |
+| number_of_nodes            | Number of nodes in the cluster       | number  | 1       | no       |
+| engine_version             | Redis engine version                 | string  | -       | yes      |
+| vpc_id                     | VPC ID for the security group        | string  | -       | yes      |
+| vpc_cidr                   | VPC CIDR block                       | string  | -       | yes      |
+| private_subnet_ids         | List of private subnet IDs           | list    | -       | yes      |
+| log_group                  | CloudWatch log group                 | string  | -       | yes      |
+| enable_auth                | Enable authentication                | bool    | false   | no       |
+| enable_transit_encryption  | Enable transit encryption            | bool    | false   | no       |
+| enable_at_rest_encryption  | Enable at-rest encryption            | bool    | false   | no       |
+| transit_encryption_mode    | Ser transit_encryption_mode. Values are preferred and required          | string  | preferred   | no       |
 
-## Outputs 
+## Outputs
 
-| Name                | Description                     | 
-|---------------------|---------------------------------| 
-| auth_token_secret   | The name of the Secrets Manager secret for authentication | 
+| Name                | Description                     |
+|---------------------|---------------------------------|
+| auth_token_secret   | The name of the Secrets Manager secret for authentication |
 
-## Usage examples 
+## Usage examples
 
 ### Example 1: Basic usage of the module
 

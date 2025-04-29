@@ -63,3 +63,8 @@ variable "enable_at_rest_encryption" {
   type    = bool
   default = false
 }
+
+variable "transit_encryption_mode" {
+  type    = string
+  default = "preferred"
+}
