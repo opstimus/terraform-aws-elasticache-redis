@@ -3,24 +3,32 @@ resource "aws_security_group" "main" {
   description = "${var.project}-${var.environment}-redis"
   vpc_id      = var.vpc_id
 
-  ingress {
-    from_port   = 6379
-    to_port     = 6379
-    protocol    = "tcp"
-    cidr_blocks = [var.vpc_cidr]
-  }
-
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-
   tags = {
     Name = "${var.project}-${var.environment}-redis"
   }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "ingress_vpc" {
+  security_group_id = aws_security_group.main.id
+
+  ip_protocol = "tcp"
+  from_port   = 6379
+  to_port     = 6379
+  cidr_ipv4   = var.vpc_cidr
+}
+
+resource "aws_vpc_security_group_egress_rule" "ipv4" {
+  security_group_id = aws_security_group.github_runner.id
+
+  ip_protocol = "-1"
+  cidr_ipv4   = "0.0.0.0/0"
+}
+
+resource "aws_vpc_security_group_egress_rule" "ipv6" {
+  security_group_id = aws_security_group.github_runner.id
+
+  ip_protocol = "-1"
+  cidr_ipv6   = "::/0"
 }
 
 resource "aws_elasticache_parameter_group" "main" {
