@@ -18,14 +18,14 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_vpc" {
 }
 
 resource "aws_vpc_security_group_egress_rule" "ipv4" {
-  security_group_id = aws_security_group.github_runner.id
+  security_group_id = aws_security_group.main.id
 
   ip_protocol = "-1"
   cidr_ipv4   = "0.0.0.0/0"
 }
 
 resource "aws_vpc_security_group_egress_rule" "ipv6" {
-  security_group_id = aws_security_group.github_runner.id
+  security_group_id = aws_security_group.main.id
 
   ip_protocol = "-1"
   cidr_ipv6   = "::/0"
