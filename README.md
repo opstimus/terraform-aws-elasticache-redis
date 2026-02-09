@@ -9,14 +9,14 @@ This Terraform module provisions an AWS ElastiCache Redis cluster, including ass
 | Name | Version | 
 |------|---------| 
 | terraform | >= 1.3.0 | 
-| aws | >= 4.0 | 
+| aws | >= 6.0 | 
 | random | >= 3.4.0 | 
 
 ## Providers 
 
 | Name | Version | 
 |------|---------| 
-| aws | >= 4.0 | 
+| aws | >= 6.0 | 
 | random | >= 3.4.0 | 
 
 ## Inputs 
