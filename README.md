@@ -36,7 +36,8 @@ This Terraform module provisions an AWS ElastiCache Redis cluster, including ass
 | log_group                  | CloudWatch log group                 | string  | -       | yes      | 
 | enable_auth                | Enable authentication                | bool    | false   | no       | 
 | enable_transit_encryption  | Enable transit encryption            | bool    | false   | no       | 
-| enable_at_rest_encryption  | Enable at-rest encryption            | bool    | false   | no       | 
+| enable_at_rest_encryption  | Enable at-rest encryption            | bool    | false   | no       |
+| tags                       | tags                                 | `map(string)` | -       |    no    | 
 
 ## Outputs 
 
@@ -64,5 +65,9 @@ module "elasticache_redis" {
   enable_auth                 = true
   enable_transit_encryption   = true
   enable_at_rest_encryption   = true
+  tags = {
+    Project = <project-name>
+    Environment = <environment-name>
+  }
 }
 ```

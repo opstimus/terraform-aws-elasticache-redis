@@ -2,33 +2,32 @@ resource "aws_security_group" "main" {
   name        = "${var.project}-${var.environment}-redis"
   description = "${var.project}-${var.environment}-redis"
   vpc_id      = var.vpc_id
-
-  tags = {
-    Name = "${var.project}-${var.environment}-redis"
-  }
+  tags = merge(
+    {
+      Name = "${var.project}-${var.environment}-redis"
+    },
+    var.tags
+  )
 }
 
 resource "aws_vpc_security_group_ingress_rule" "ingress_vpc" {
   security_group_id = aws_security_group.main.id
-
-  ip_protocol = "tcp"
-  from_port   = 6379
-  to_port     = 6379
-  cidr_ipv4   = var.vpc_cidr
+  ip_protocol       = "tcp"
+  from_port         = 6379
+  to_port           = 6379
+  cidr_ipv4         = var.vpc_cidr
 }
 
 resource "aws_vpc_security_group_egress_rule" "ipv4" {
   security_group_id = aws_security_group.main.id
-
-  ip_protocol = "-1"
-  cidr_ipv4   = "0.0.0.0/0"
+  ip_protocol       = "-1"
+  cidr_ipv4         = "0.0.0.0/0"
 }
 
 resource "aws_vpc_security_group_egress_rule" "ipv6" {
   security_group_id = aws_security_group.main.id
-
-  ip_protocol = "-1"
-  cidr_ipv6   = "::/0"
+  ip_protocol       = "-1"
+  cidr_ipv6         = "::/0"
 }
 
 resource "aws_elasticache_parameter_group" "main" {
@@ -52,10 +51,12 @@ resource "aws_elasticache_parameter_group" "main" {
 resource "aws_elasticache_subnet_group" "main" {
   name       = "${var.project}-${var.environment}"
   subnet_ids = var.private_subnet_ids
-
-  tags = {
-    Name = "${var.project}-${var.environment}"
-  }
+  tags = merge(
+    {
+      Name = "${var.project}-${var.environment}"
+    },
+    var.tags
+  )
 }
 
 resource "random_password" "main" {
