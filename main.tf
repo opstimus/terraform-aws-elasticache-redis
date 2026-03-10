@@ -1,10 +1,10 @@
 resource "aws_security_group" "main" {
-  name        = "${var.project}-${var.environment}-redis"
-  description = "${var.project}-${var.environment}-redis"
+  name        = "${var.project}-${var.environment}-${var.name}-redis"
+  description = "${var.project}-${var.environment}-${var.name}-redis"
   vpc_id      = var.vpc_id
   tags = merge(
     {
-      Name = "${var.project}-${var.environment}-redis"
+      Name = "${var.project}-${var.environment}-${var.name}-redis"
     },
     var.tags
   )
@@ -32,7 +32,7 @@ resource "aws_vpc_security_group_egress_rule" "ipv6" {
 
 resource "aws_elasticache_parameter_group" "main" {
   count  = length(var.parameter_group_parameters) != 0 ? 1 : 0
-  name   = "${var.project}-${var.environment}"
+  name   = "${var.project}-${var.environment}-${var.name}"
   family = var.parameter_group_family
 
   dynamic "parameter" {
@@ -49,11 +49,11 @@ resource "aws_elasticache_parameter_group" "main" {
 }
 
 resource "aws_elasticache_subnet_group" "main" {
-  name       = "${var.project}-${var.environment}"
+  name       = "${var.project}-${var.environment}-${var.name}"
   subnet_ids = var.private_subnet_ids
   tags = merge(
     {
-      Name = "${var.project}-${var.environment}"
+      Name = "${var.project}-${var.environment}-${var.name}"
     },
     var.tags
   )
@@ -68,7 +68,7 @@ resource "random_password" "main" {
 
 resource "aws_secretsmanager_secret" "main" {
   count = var.enable_auth ? 1 : 0
-  name  = "${var.project}-${var.environment}-redis"
+  name  = "${var.project}-${var.environment}-${var.name}-redis"
 }
 
 resource "aws_secretsmanager_secret_version" "main" {
@@ -78,7 +78,7 @@ resource "aws_secretsmanager_secret_version" "main" {
 }
 
 resource "aws_elasticache_replication_group" "main" {
-  replication_group_id       = "${var.project}-${var.environment}"
+  replication_group_id       = "${var.project}-${var.environment}-${var.name}"
   description                = "Primary replication group"
   apply_immediately          = true
   auto_minor_version_upgrade = false
