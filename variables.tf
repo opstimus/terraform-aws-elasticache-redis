@@ -10,7 +10,8 @@ variable "environment" {
 
 variable "name" {
   type        = string
-  description = "session"
+  description = "Optional name segment appended to resource names. Leave empty to keep the original naming and avoid recreating existing resources."
+  default     = ""
 }
 
 variable "tags" {
