@@ -59,7 +59,7 @@ resource "aws_elasticache_subnet_group" "main" {
   subnet_ids = var.private_subnet_ids
   tags = merge(
     {
-      Name = "${local.name_prefix}"
+      Name = local.name_prefix
     },
     var.tags
   )
