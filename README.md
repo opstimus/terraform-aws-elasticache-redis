@@ -1,3 +1,11 @@
+> ⚠️ **Moved to the monorepo.**
+> This module now lives in [`opstimus/terraform-modules`](https://github.com/opstimus/terraform-modules) at `modules/aws-elasticache-redis`.
+>
+> ```hcl
+> source = "git::https://github.com/opstimus/terraform-modules.git//modules/aws-elasticache-redis?ref=aws-elasticache-redis/v2.2.0"
+> ```
+>
+> This repository remains for existing consumers; new development happens in the monorepo.
 # AWS ElastiCache Redis Module
 
 ## Description 
